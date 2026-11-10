@@ -15,3 +15,29 @@
 ---
 - ✔️ OK - Query **[ 5 ]**
 
+---
+- ✔️ OK - Query **[ 6 ]**
+
+---
+- ✔️ OK - Query **[ 7 ]**
+
+---
+- ✔️ OK - Query **[ 8 ]**
+
+---
+- ❌ MISMATCH - Query **[ 9 ]** Result does not match expected output.
+
+
+🔢 Different result lengths: 
+- **Expected:** 1
+- **Got:** 2
+
+---
+- ✔️ OK - Query **[ 10 ]**
+
+---
+- ✔️ OK - Query **[ 11 ]**
+
+---
+- ✔️ OK - Query **[ 13 ]**
+
