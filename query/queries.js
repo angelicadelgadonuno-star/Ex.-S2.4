@@ -58,22 +58,18 @@ db.restaurants.find({ borough: { $nin: ["Staten Island", "Queens", "Bronx", "Bro
 db.restaurants.find({ "grades.score": { $lte: 10 } },{ restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 })
 
 // 21. Trobar restaurants que preparen peix, no 'American' ni 'Chinees', o nom comença amb 'Wil'.
-db.restaurants.find({$or: [{ cuisine: { $regex: /seafood/i, $nin: ["American", "Chinese"] } },{ name: { $regex: "^Wil" } }]}, { _id: 0 })
 
 // 22. Trobar restaurant_id, name, i grades per grau "A", score 11, i data "2014-08-11T00:00:00Z".
-db.restaurants.find({grades: {$elemMatch: {grade: "A",score: 11,date: "2014-08-11T00:00:00Z"}}},{ restaurant_id: 1, name: 1, grades: 1, _id: 0 })
 
 // 23. Trobar restaurant_id, name i grades on el 2n element té grau "A", score 9 i data "2014-08-11T00:00:00Z".
-db.restaurants.find({"grades.1.grade": "A","grades.1.score": 9,"grades.1.date": "2014-08-11T00:00:00Z"},{ restaurant_id: 1, name: 1, grades: 1, _id: 0 })
 
 // 24. Trobar el restaurant_id, name, street, zipcode i coordenades dels restaurants a menys de 5 km de [-74, 40.7].
-db.restaurants.find({location: {$near: {$geometry: { type: "Point", coordinates: [-74, 40.7] },$maxDistance: 5000}}}, { restaurant_id: 1, name: 1, "address.street": 1, "address.zipcode": 1, location: 1, _id: 0 })
 
 // 25. Ordenar els noms dels restaurants en ordre ascendent, mostrant totes les columnes.
-db.restaurants.find({}, { _id: 0 }).sort({ name: 1 })
+
 
 // 26. Ordenar els noms dels restaurants en ordre descendent, mostrant totes les columnes.
-db.restaurants.find({}, { _id: 0 }).sort({ name: -1 })
+
 
 
 // 27. Ordenar cuisine ascendent i borough descendent.
