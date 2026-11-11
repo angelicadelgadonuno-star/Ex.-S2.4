@@ -61,13 +61,13 @@
 - 🧪 **Query**: `db.restaurants.find({ borough: "Bronx" }, { _id: 0 }).limit(5)`
 - ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 5
-- 🔍 **Documents examined**: 53
+- 🔍 **Documents examined**: 56
 - 🛠️ **Execution stage**: LIMIT
 
 ## 🚨 Performance Issues
 
 ### ⚠️ High Priority Issues
-- ⚠️ Examined 53 docs to return 5 (ratio 10.6:1)
+- ⚠️ Examined 56 docs to return 5 (ratio 11.2:1)
 
 
 7. ## 📊 Query Performance Report
@@ -75,13 +75,13 @@
 - 🧪 **Query**: `db.restaurants.find({ borough: "Bronx" }, { _id: 0 }).skip(5).limit(5)`
 - ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 5
-- 🔍 **Documents examined**: 155
+- 🔍 **Documents examined**: 154
 - 🛠️ **Execution stage**: LIMIT
 
 ## 🚨 Performance Issues
 
 ### ⚠️ High Priority Issues
-- ⚠️ Examined 155 docs to return 5 (ratio 31.0:1)
+- ⚠️ Examined 154 docs to return 5 (ratio 30.8:1)
 
 
 8. ## 📊 Query Performance Report
@@ -146,7 +146,7 @@ db.restaurants.createIndex({ grades.score: 1 });
 11. ## 📊 Query Performance Report
 
 - 🧪 **Query**: `db.restaurants.find({cuisine: { $ne: "American" }, "grades.score": { $gt: 70 }, "location.coordinates.0": { $lt: -65.754168 }}, { _id: 0 })`
-- ⏱️ **Execution time**: 1 ms
+- ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 1
 - 🔍 **Documents examined**: 664
 - 🛠️ **Execution stage**: PROJECTION_SIMPLE
@@ -294,7 +294,7 @@ db.restaurants.createIndex({ borough: 1 });
 20. ## 📊 Query Performance Report
 
 - 🧪 **Query**: `db.restaurants.find({ "grades.score": { $lte: 10 } },{ restaurant_id: 1, name: 1, borough: 1, cuisine: 1, _id: 0 })`
-- ⏱️ **Execution time**: 1 ms
+- ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 612
 - 🔍 **Documents examined**: 664
 - 🛠️ **Execution stage**: PROJECTION_SIMPLE
@@ -309,5 +309,19 @@ Consider creating these indexes:
 ```javascript
 db.restaurants.createIndex({ grades.score: 1 });
 ```
+
+
+21. ## 📊 Query Performance Report
+
+- 🧪 **Query**: `db.restaurants.find({ $or: [{ cuisine: { $regex: /seafood/i, $nin: ["American", "Chinese"] } },{ name: { $regex: "^Wil" } }] }, { _id: 0 })`
+- ⏱️ **Execution time**: 0 ms
+- 📚 **Documents returned**: 14
+- 🔍 **Documents examined**: 664
+- 🛠️ **Execution stage**: SUBPLAN
+
+## 🚨 Performance Issues
+
+### ⚠️ High Priority Issues
+- ⚠️ Examined 664 docs to return 14 (ratio 47.4:1)
 
 
