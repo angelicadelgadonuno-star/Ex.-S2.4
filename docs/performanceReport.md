@@ -61,13 +61,13 @@
 - 🧪 **Query**: `db.restaurants.find({ borough: "Bronx" }, { _id: 0 }).limit(5)`
 - ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 5
-- 🔍 **Documents examined**: 56
+- 🔍 **Documents examined**: 55
 - 🛠️ **Execution stage**: LIMIT
 
 ## 🚨 Performance Issues
 
 ### ⚠️ High Priority Issues
-- ⚠️ Examined 56 docs to return 5 (ratio 11.2:1)
+- ⚠️ Examined 55 docs to return 5 (ratio 11.0:1)
 
 
 7. ## 📊 Query Performance Report
@@ -75,19 +75,19 @@
 - 🧪 **Query**: `db.restaurants.find({ borough: "Bronx" }, { _id: 0 }).skip(5).limit(5)`
 - ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 5
-- 🔍 **Documents examined**: 154
+- 🔍 **Documents examined**: 156
 - 🛠️ **Execution stage**: LIMIT
 
 ## 🚨 Performance Issues
 
 ### ⚠️ High Priority Issues
-- ⚠️ Examined 154 docs to return 5 (ratio 30.8:1)
+- ⚠️ Examined 156 docs to return 5 (ratio 31.2:1)
 
 
 8. ## 📊 Query Performance Report
 
 - 🧪 **Query**: `db.restaurants.find({ "grades.score": { $gt: 90 } }, { _id: 0 })`
-- ⏱️ **Execution time**: 1 ms
+- ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 2
 - 🔍 **Documents examined**: 664
 - 🛠️ **Execution stage**: PROJECTION_SIMPLE
@@ -110,7 +110,7 @@ db.restaurants.createIndex({ grades.score: 1 });
 9. ## 📊 Query Performance Report
 
 - 🧪 **Query**: `db.restaurants.find({cuisine: { $ne: "American" },"grades.score": { $gt: 70 },"location.coordinates.0": { $lt: -65.754168 }}, { _id: 0 })`
-- ⏱️ **Execution time**: 0 ms
+- ⏱️ **Execution time**: 1 ms
 - 📚 **Documents returned**: 1
 - 🔍 **Documents examined**: 664
 - 🛠️ **Execution stage**: PROJECTION_SIMPLE
@@ -196,7 +196,7 @@ db.restaurants.createIndex({ grades.score: 1 });
 13. ## 📊 Query Performance Report
 
 - 🧪 **Query**: `db.restaurants.find({ cuisine: { $ne: "American" }, "grades.grade": "A", borough: { $ne: "Brooklyn" }}, { _id: 0 }).sort({ cuisine: -1 })`
-- ⏱️ **Execution time**: 1 ms
+- ⏱️ **Execution time**: 0 ms
 - 📚 **Documents returned**: 318
 - 🔍 **Documents examined**: 664
 - 🛠️ **Execution stage**: SORT
@@ -323,5 +323,16 @@ db.restaurants.createIndex({ grades.score: 1 });
 
 ### ⚠️ High Priority Issues
 - ⚠️ Examined 664 docs to return 14 (ratio 47.4:1)
+
+
+22. ## 📊 Query Performance Report
+
+- 🧪 **Query**: `db.restaurants.find({ grades: { $elemMatch: { grade: "A", score: 11, date: "2014-08-11T00:00:00Z" }}}, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })`
+- ⏱️ **Execution time**: 0 ms
+- 📚 **Documents returned**: 0
+- 🔍 **Documents examined**: 664
+- 🛠️ **Execution stage**: PROJECTION_SIMPLE
+
+## ✅ No significant issues detected
 
 
