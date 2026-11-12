@@ -64,8 +64,7 @@ db.restaurants.find({ $or: [{ cuisine: { $regex: /seafood/i, $nin: ["American", 
 db.restaurants.find({ grades: { $elemMatch: { grade: "A", score: 11, date: "2014-08-11T00:00:00Z" }}}, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
 
 // 23. Trobar restaurant_id, name i grades on el 2n element té grau "A", score 9 i data "2014-08-11T00:00:00Z".
-db.restaurants.find({"grades.1.grade": "A", "grades.1.score": 9, "grades.1.date": "2014-08-11T00:00:00Z"}, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
-
+db.restaurants.find({grades: {$elemMatch: { grade: "A", score: 11, date: new Date("2014-08-11T00:00:00Z")}}}, { restaurant_id: 1, name: 1, grades: 1, _id: 0 })
 // 24. Trobar el restaurant_id, name, street, zipcode i coordenades dels restaurants a menys de 5 km de [-74, 40.7].
 db.restaurants.find({ location: { $geoWithin: { $centerSphere: [ [-74, 40.7], 5000 / 6378100 ]}}}, { restaurant_id: 1, name: 1, "address.street": 1, "address.zipcode": 1, location: 1, _id: 0 })
 
